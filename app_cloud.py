@@ -11,8 +11,10 @@ import selenium
 print(selenium.__version__)
 
 # install driver
-driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
-
+options_ = Options()
+options_.add_argument('--disable-gpu')
+options_.add_argument('--headless')
+driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options= options_)
 
 
 st.title("Hello, Eng Mahmoud")
