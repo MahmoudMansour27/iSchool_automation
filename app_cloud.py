@@ -1,19 +1,21 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 import pyperclip
 import streamlit as st
 import time
 
 # install driver
-firefoxOptions = Options()
-firefoxOptions.add_argument("--headless")
-service = Service(GeckoDriverManager().install())
-driver = webdriver.Firefox(
-    options=firefoxOptions,
-    service=service,
-)
+@st.experimental_singleton
+def get_driver():
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+options = Options()
+options.add_argument('--disable-gpu')
+options.add_argument('--headless')
+
+driver = get_driver()
 
 
 st.title("Hello, Eng Mahmoud")
@@ -27,7 +29,6 @@ username = str(st.secrets.username)
 
 # login
 driver.get('https://demi.ischooltech.com/login/tutor')
-st.code(driver.page_source)
 driver.find_element('id', 'Email ID').send_keys(username)
 driver.find_element('id', 'exampleFormControlInput1').send_keys(username)
 driver.find_element('class name', 'button.button-color-primary.w-100.rounded-pill.font_16.font-semibold.mt-4.m-auto.button-size-med').click()
