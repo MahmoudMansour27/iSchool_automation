@@ -1,6 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.chrome.service import Service as ChromiumService
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 import pyperclip
@@ -11,11 +11,20 @@ import selenium
 print(selenium.__version__)
 
 # install driver
-options_ = Options()
-options_.add_argument('--disable-gpu')
-options_.add_argument('--headless')
-driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options= options_)
+@st.cache_resource
+def get_driver():
+    return webdriver.Chrome(
+        service=Service(
+            ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+        ),
+        options=options,
+    )
 
+options = Options()
+options.add_argument("--disable-gpu")
+options.add_argument("--headless")
+
+driver = get_driver()
 
 st.title("Hello, Eng Mahmoud")
 st.write("❤️ أجمد مهندس في العالم ربنا يحفظك")
