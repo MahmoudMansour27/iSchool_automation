@@ -7,15 +7,10 @@ import streamlit as st
 import time
 
 # install driver
-@st.experimental_singleton
-def get_driver():
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
 options = Options()
 options.add_argument('--disable-gpu')
 options.add_argument('--headless')
-
-driver = get_driver()
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
 st.title("Hello, Eng Mahmoud")
