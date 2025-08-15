@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
+from selenium.webdriver.support.ui import WebDriverWait
 import pyperclip
 import streamlit as st
 import time
@@ -37,6 +38,9 @@ username = str(st.secrets.username)
 
 # login
 driver.get('https://demi.ischooltech.com/login/tutor')
+WebDriverWait(driver=driver, timeout=10).until(
+    lambda x: x.execute_script("return document.readyState === 'complete'")
+)
 driver.find_element('id', 'Email ID').send_keys(username)
 driver.find_element('id', 'exampleFormControlInput1').send_keys(username)
 driver.find_element('class name', 'button.button-color-primary.w-100.rounded-pill.font_16.font-semibold.mt-4.m-auto.button-size-med').click()
