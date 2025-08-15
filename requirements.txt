@@ -1,4 +1,4 @@
 streamlit
 selenium
-webdriver_manager
+webdriver-manager
 pyperclip
