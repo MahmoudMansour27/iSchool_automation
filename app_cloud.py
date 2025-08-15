@@ -38,9 +38,7 @@ username = str(st.secrets.username)
 
 # login
 driver.get('https://demi.ischooltech.com/login/tutor')
-WebDriverWait(driver=driver, timeout=10).until(
-    lambda x: x.execute_script("return document.readyState === 'complete'")
-)
+time.sleep(5)
 driver.find_element('id', 'Email ID').send_keys(username)
 driver.find_element('id', 'exampleFormControlInput1').send_keys(username)
 driver.find_element('class name', 'button.button-color-primary.w-100.rounded-pill.font_16.font-semibold.mt-4.m-auto.button-size-med').click()
