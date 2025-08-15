@@ -6,6 +6,9 @@ from webdriver_manager.core.os_manager import ChromeType
 import pyperclip
 import streamlit as st
 import time
+import selenium
+
+print(selenium.__version__)
 
 # install driver
 driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
